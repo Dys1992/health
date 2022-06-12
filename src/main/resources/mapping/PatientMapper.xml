@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cm.health.repository.PatientDao">
+
+    <resultMap id="patientMap" type="com.cm.health.model.entity.PatientEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result property="patientName" column="patient_name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="sex" column="sex" jdbcType="INTEGER"/>
+        <result property="height" column="height" jdbcType="INTEGER"/>
+        <result property="weight" column="weight" jdbcType="DOUBLE"/>
+        <result property="createTime" column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        <result property="modifyTime" column="modify_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <insert id="insertPatient" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into patient_info(patient_name, age, sex, height, weight)
+        values (#{patientName}, #{age}, #{sex}, #{height}, #{weight})
+    </insert>
+
+    <update id="updatePatient" parameterType="com.cm.health.model.entity.PatientEntity">
+        update patient_info set patient_name = #{patientName}
+            <if test="age !=null">
+                , age=#{age}
+            </if>
+            <if test="sex !=null">
+                , sex=#{sex}
+            </if>
+            <if test="height !=null">
+                , height=#{height}
+            </if>
+            <if test="weight !=null ">
+                , weight=#{weight}
+            </if>
+            where id = #{id}
+    </update>
+
+    <select id="searchPatientBP" parameterType="com.cm.health.model.request.SearchPatientRequest"
+            resultMap="patientMap">
+        select * from patient_info where 1=1
+        <if test="patientName !=null and patientName !='' ">
+           and patient_name like concat('%', #{patientName}, '%')
+        </if>
+    </select>
+
+
+</mapper>
