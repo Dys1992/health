@@ -3,6 +3,7 @@ package com.cm.health.repository;
 import com.cm.health.model.entity.PatientEntity;
 import com.cm.health.model.request.SearchBpRequest;
 import com.cm.health.model.request.SearchPatientRequest;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,9 +14,33 @@ import java.util.List;
  */
 @Mapper
 public interface PatientDao {
-    boolean insertPatient(PatientEntity patient);
+    /**
+     * 写入
+     *
+     * @param patient
+     * @return
+     */
+    boolean insert(PatientEntity patient);
 
-    boolean updatePatient(PatientEntity patient);
+    /**
+     * 更新
+     *
+     * @param patient
+     * @return
+     */
+    boolean update(PatientEntity patient);
 
-    List<PatientEntity> searchPatientBP(SearchPatientRequest request);
+    /**
+     * 分页查询
+     *
+     * @param request
+     * @return
+     */
+    Page<PatientEntity> pageList(SearchPatientRequest request);
+
+    /**
+     * 获取所有病人信息
+     * @return
+     */
+    List<PatientEntity> getAll();
 }

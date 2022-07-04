@@ -14,35 +14,45 @@
     </resultMap>
 
 
-    <insert id="insertPatient" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into patient_info(patient_name, age, sex, height, weight)
         values (#{patientName}, #{age}, #{sex}, #{height}, #{weight})
     </insert>
 
-    <update id="updatePatient" parameterType="com.cm.health.model.entity.PatientEntity">
+    <update id="update" parameterType="com.cm.health.model.entity.PatientEntity">
         update patient_info set patient_name = #{patientName}
-            <if test="age !=null">
-                , age=#{age}
-            </if>
-            <if test="sex !=null">
-                , sex=#{sex}
-            </if>
-            <if test="height !=null">
-                , height=#{height}
-            </if>
-            <if test="weight !=null ">
-                , weight=#{weight}
-            </if>
-            where id = #{id}
+        <if test="age !=null">
+            , age=#{age}
+        </if>
+        <if test="sex !=null">
+            , sex=#{sex}
+        </if>
+        <if test="height !=null">
+            , height=#{height}
+        </if>
+        <if test="weight !=null ">
+            , weight=#{weight}
+        </if>
+        where id = #{id}
     </update>
 
-    <select id="searchPatientBP" parameterType="com.cm.health.model.request.SearchPatientRequest"
+    <select id="pageList" parameterType="com.cm.health.model.request.SearchPatientRequest"
             resultMap="patientMap">
         select * from patient_info where 1=1
         <if test="patientName !=null and patientName !='' ">
-           and patient_name like concat('%', #{patientName}, '%')
+            and patient_name like concat('%', #{patientName}, '%')
         </if>
     </select>
 
+    <select id="getPatientIdByName" parameterType="java.lang.String" resultType="java.lang.Long">
+        select id
+        from patient_info
+        where patient_name like concat('%', #{patientName}, '%')
+    </select>
+
+    <select id="getAll"  resultMap="patientMap">
+        select *
+        from patient_info
+    </select>
 
 </mapper>

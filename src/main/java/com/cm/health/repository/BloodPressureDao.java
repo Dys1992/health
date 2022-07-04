@@ -1,9 +1,7 @@
 package com.cm.health.repository;
 
 import com.cm.health.model.entity.BloodPressureEntity;
-import com.cm.health.model.entity.PatientEntity;
 import com.cm.health.model.request.SearchBpRequest;
-import com.cm.health.model.response.SearchBloodPressureResponse;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.List;
  */
 @Mapper
 public interface BloodPressureDao {
-    boolean insertBP(BloodPressureEntity bloodPressure);
+    boolean insert(BloodPressureEntity bloodPressure);
 
-    List<BloodPressureEntity> searchBP(SearchBpRequest request);
+    List<BloodPressureEntity> pageList(SearchBpRequest request);
 }

@@ -8,6 +8,6 @@ import lombok.Data;
  */
 @Data
 public class BasicSearchRequest {
-    public int page;
-    public int pageSize;
+    public int page = 1;
+    public int pageSize = 10;
 }

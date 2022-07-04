@@ -6,8 +6,9 @@ import com.cm.health.model.request.AddBPRequest;
 import com.cm.health.model.request.AddPatientRequest;
 
 import com.cm.health.model.request.UpdatePatientRequest;
-import com.cm.health.model.response.SearchBloodPressureResponse;
-import com.cm.health.model.response.SearchPatientResponse;
+import com.cm.health.model.response.PatientVO;
+import com.cm.health.model.response.SearchBloodPressureVO;
+import com.cm.health.model.response.SearchPatientVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -39,8 +40,10 @@ public interface CovertBasic {
      */
     BloodPressureEntity covertAddBPToEntity(AddBPRequest request);
 
-    List<SearchBloodPressureResponse> covertAddBPToEntity(List<BloodPressureEntity> list);
+    List<SearchBloodPressureVO> covertAddBPToEntity(List<BloodPressureEntity> list);
 
-    List<SearchPatientResponse> coverentityToResponse(List<PatientEntity> list);
+    List<SearchPatientVO> coverentityToResponse(List<PatientEntity> list);
+
+    List<PatientVO> patientEntityToVo(List<PatientEntity> list);
 
 }

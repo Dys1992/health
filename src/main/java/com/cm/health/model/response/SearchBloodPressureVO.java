@@ -11,7 +11,7 @@ import java.util.Date;
  * @date: 2022/5/13
  */
 @Data
-public class SearchBloodPressureResponse {
+public class SearchBloodPressureVO {
     private Long patientId;
     private int diastolicPressure;
     private int systolicPressure;
